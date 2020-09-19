@@ -13,5 +13,23 @@ class FireStoreServices {
     return _db.collection('category').doc().set(categoryModel.toMap());
   }
 
-  Future<List<CategoryModel>> getCategories() {}
+  Future<List<CategoryModel>> getCategories() async {
+    List<CategoryModel> categorymodels = [];
+
+    await _db
+        .collection('category')
+        .orderBy('category')
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                // print(CategoryModel.fromFirestore(doc.data()).color);
+                categorymodels.add(CategoryModel.fromFirestore(doc.data()));
+              })
+            });
+    return categorymodels;
+  }
+
+  // Future<void> addTransaction(TransactionModel transactionModel) {
+  //   return _db.collection('category').doc().set(transactionModel.toMap());
+  // }
 }

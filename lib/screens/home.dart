@@ -1,4 +1,5 @@
-import 'package:budget/screens/add_category.dart';
+import 'package:budget/screens/category.dart';
+import 'package:budget/screens/transaction.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -22,12 +23,17 @@ class Home extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => CategoryScreen()),
                   );
                 },
-                child: Text('Add Category'),
+                child: Text('Category'),
               ),
               FlatButton(
                 color: Colors.blue,
-                onPressed: () {},
-                child: Text('Add Transaction'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Transaction()),
+                  );
+                },
+                child: Text('Transaction'),
               ),
               FlatButton(
                 color: Colors.blue,
@@ -44,11 +50,11 @@ class Home extends StatelessWidget {
                 onPressed: () {},
                 child: Text('Aggregate Transaction'),
               ),
-              FlatButton(
-                color: Colors.blue,
-                onPressed: () {},
-                child: Text('Add Category'),
-              ),
+              // FlatButton(
+              //   color: Colors.blue,
+              //   onPressed: () {},
+              //   child: Text('Add Category'),
+              // ),
             ],
           ),
         ),
