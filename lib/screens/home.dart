@@ -1,4 +1,5 @@
 import 'package:budget/screens/category.dart';
+import 'package:budget/screens/category_wise_transaction.dart';
 import 'package:budget/screens/transaction.dart';
 import 'package:flutter/material.dart';
 
@@ -37,12 +38,13 @@ class Home extends StatelessWidget {
               ),
               FlatButton(
                 color: Colors.blue,
-                onPressed: () {},
-                child: Text('Total Transaction'),
-              ),
-              FlatButton(
-                color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CategoryWiseTransaction()),
+                  );
+                },
                 child: Text('Category Wise Transaction'),
               ),
               FlatButton(

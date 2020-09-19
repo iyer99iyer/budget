@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TransactionModel {
   final String id;
   final String color;
-  final DateTime date;
+  final Timestamp date;
   final String category;
   final String particular;
   final double amount;
@@ -24,4 +26,12 @@ class TransactionModel {
       'color': color
     };
   }
+
+  TransactionModel.fromFirestore(Map<String, dynamic> firestore)
+      : id = firestore['id'],
+        date = firestore['date'],
+        category = firestore['category'],
+        amount = firestore['amount'],
+        particular = firestore['particular'],
+        color = firestore['color'];
 }

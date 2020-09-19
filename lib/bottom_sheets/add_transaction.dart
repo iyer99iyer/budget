@@ -1,6 +1,7 @@
 import 'package:budget/database/firestore_services.dart';
 import 'package:budget/models/category_model.dart';
 import 'package:budget/models/transaction_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
@@ -138,7 +139,7 @@ class _AddTransactionState extends State<AddTransaction> {
                     print('${amount.toStringAsFixed(2)}');
                     var transaction = TransactionModel(
                       id: uuid.v4(),
-                      date: DateTime.now(),
+                      date: Timestamp.now(),
                       particular: particularName,
                       category: currentCategory,
                       amount: amount,
@@ -148,7 +149,7 @@ class _AddTransactionState extends State<AddTransaction> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'Add Category',
+                    'Add Transaction',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

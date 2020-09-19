@@ -2,6 +2,8 @@ import 'package:budget/models/category_model.dart';
 import 'package:budget/models/transaction_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/transaction_model.dart';
+
 class FireStoreServices {
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -27,6 +29,24 @@ class FireStoreServices {
               })
             });
     return categorymodels;
+  }
+
+  Future<List<TransactionModel>> queryTransaction(String category) async {
+    List<TransactionModel> transactionModels = [];
+
+    await _db
+        .collection('transaction')
+        .where('category', isEqualTo: category)
+        .orderBy('date', descending: true)
+        .get()
+        .then((QuerySnapshot querySnapshot) => {
+              querySnapshot.docs.forEach((doc) {
+                print(TransactionModel.fromFirestore(doc.data()).amount);
+                transactionModels
+                    .add(TransactionModel.fromFirestore(doc.data()));
+              })
+            });
+    return transactionModels;
   }
 
   // Future<void> addTransaction(TransactionModel transactionModel) {

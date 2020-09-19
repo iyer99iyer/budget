@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Widgets/table_title_widget.dart';
+
 class CategoryScreen extends StatefulWidget {
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
@@ -40,35 +42,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
+                    TableTitle(
                       width: size.width * .3,
-                      child: Center(
-                        child: Text(
-                          'Color',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      title: 'Color',
                     ),
-                    Container(
+                    TableTitle(
                       width: size.width * .3,
-                      child: Center(
-                        child: Text(
-                          'Category',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      title: 'Category',
                     ),
-                    Container(
+                    TableTitle(
                       width: size.width * .3,
-                      child: Center(
-                        child: Text(
-                          'Action',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                      title: 'Action',
                     ),
                   ],
                 ),

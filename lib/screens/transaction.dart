@@ -59,45 +59,12 @@ class _TransactionState extends State<Transaction> {
                 SizedBox(
                   height: 12,
                 ),
-
-                // Container(
-                //   decoration: BoxDecoration(
-                //     border: Border.all(color: Colors.black),
-                //     color: Colors.green,
-                //   ),
-                //   padding: EdgeInsets.symmetric(vertical: 10),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //     children: [
-                //
-                //       TableRowElement(
-                //         width: size.width * .15,
-                //         title: '22/08',
-                //       ),
-                //
-                //       TableRowElement(
-                //         width: size.width * .25,
-                //         title: 'Electrical',
-                //       ),
-                //       TableRowElement(
-                //         width: size.width * .25,
-                //         title: 'Material',
-                //       ),
-                //       TableRowElement(
-                //         width: size.width * .2,
-                //         title: '12,000',
-                //       ),
-                //       // DeleteIcon(),
-                //     ],
-                //   ),
-                // ),
                 Container(
-                  height: size.height * .8,
+                  height: size.height * .76,
                   child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('transaction')
-                        .orderBy('date')
-                        .limit(15)
+                        .orderBy('date', descending: true)
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
