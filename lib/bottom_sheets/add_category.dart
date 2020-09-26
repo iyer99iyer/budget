@@ -1,3 +1,4 @@
+import 'package:budget/constant.dart';
 import 'package:budget/database/firestore_services.dart';
 import 'package:budget/models/category_model.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,15 @@ class AddCategory extends StatefulWidget {
   _AddCategoryState createState() => _AddCategoryState();
 }
 
-List<String> colorValues = ['0xFF99FF90', '0xFFC4C4C4', '0xFFF3E09B'];
+List<String> colorValues = [
+  '0xFF99FF90',
+  '0xFFC4C4C4',
+  '0xFFF3E09B',
+  '0xFFffc1f3',
+  '0xFFfce2ce',
+  '0xFFf9f7d9',
+  '0xFFcffffe',
+];
 String color = '0xFFC4C4C4';
 String categoryName;
 
@@ -26,12 +35,16 @@ class _AddCategoryState extends State<AddCategory> {
         children: <Widget>[
           Text(
             'Add Category',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: kBlackFontStyle.copyWith(
+                fontWeight: FontWeight.bold, fontSize: 30),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Color'),
+              Text(
+                'Color',
+                style: kBlackFontStyle,
+              ),
               DropdownButton(
                 onChanged: (value) {
                   setState(() {
@@ -59,7 +72,10 @@ class _AddCategoryState extends State<AddCategory> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Category'),
+              Text(
+                'Category',
+                style: kBlackFontStyle,
+              ),
               Container(
                 width: 120,
                 child: TextField(
@@ -70,13 +86,18 @@ class _AddCategoryState extends State<AddCategory> {
                     });
                   },
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(hintText: 'Category name'),
+                  decoration: InputDecoration(
+                    hintText: 'Category name',
+                  ),
                 ),
               )
             ],
           ),
+          SizedBox(
+            height: 20,
+          ),
           FlatButton(
-            color: Colors.blue,
+            color: Color(0xFF2F5A9B),
             onPressed: () {
               print('$color $categoryName');
               var category = CategoryModel(
@@ -89,7 +110,7 @@ class _AddCategoryState extends State<AddCategory> {
             },
             child: Text(
               'Add Category',
-              style: TextStyle(color: Colors.white),
+              style: kWhiteFontStyle,
             ),
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:budget/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +12,10 @@ class TableRowElement extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      child: Center(
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: 15,
-          ),
-        ),
+      child: Text(
+        title,
+        textAlign: TextAlign.left,
+        style: kBlackFontStyle.copyWith(fontSize: 19),
       ),
     );
   }
@@ -36,9 +34,7 @@ class TableRowElementNumber extends StatelessWidget {
       width: width,
       child: Text(
         title,
-        style: TextStyle(
-          fontSize: 15,
-        ),
+        style: kBlackFontStyle.copyWith(fontSize: 16),
         textAlign: TextAlign.end,
       ),
     );

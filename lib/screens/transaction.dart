@@ -2,6 +2,7 @@
 import 'package:budget/Widgets/table_row_elements.dart';
 import 'package:budget/Widgets/table_title_widget.dart';
 import 'package:budget/bottom_sheets/add_transaction.dart';
+import 'package:budget/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,11 @@ class _TransactionState extends State<Transaction> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Transactions'),
+        title: Text(
+          'Transactions',
+          style: kWhiteFontStyle,
+        ),
+        backgroundColor: Color(0xFFBB3C3C),
       ),
       body: SafeArea(
         child: Center(
@@ -105,9 +110,10 @@ class _TransactionState extends State<Transaction> {
                                   width: size.width * .25,
                                   title: document.data()['particular'],
                                 ),
-                                TableRowElement(
+                                TableRowElementNumber(
                                   width: size.width * .2,
-                                  title: document.data()['amount'].toString(),
+                                  title:
+                                      "${double.parse(document.data()['amount'].toString()).toStringAsFixed(0)}/-",
                                 ),
                                 // DeleteIcon(),
                               ],
@@ -125,7 +131,11 @@ class _TransactionState extends State<Transaction> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _onButtonPressed(),
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        backgroundColor: Color(0xFFBB3C3C),
       ),
     );
   }

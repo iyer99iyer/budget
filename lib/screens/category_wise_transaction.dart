@@ -1,13 +1,11 @@
+import 'package:budget/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 import '../Widgets/table_row_elements.dart';
 import '../Widgets/table_title_widget.dart';
 import '../database/firestore_services.dart';
 import '../models/category_model.dart';
 import '../models/transaction_model.dart';
-
-List<TransactionModel> transactions = [];
 
 class CategoryWiseTransaction extends StatefulWidget {
   @override
@@ -16,11 +14,10 @@ class CategoryWiseTransaction extends StatefulWidget {
 }
 
 FireStoreServices fireStoreServices = FireStoreServices();
-var uuid = Uuid();
 
 List<String> categoryList = [];
 
-Map<String, String> categoryMap = {};
+List<TransactionModel> transactions = [];
 
 bool loading = true;
 
@@ -39,15 +36,12 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
 
   getCategories() async {
     categoryList.clear();
-    categoryMap.clear();
 
     List<CategoryModel> categories = await fireStoreServices.getCategories();
 
     for (CategoryModel model in categories) {
       print(model.category);
       categoryList.add(model.category);
-
-      categoryMap[model.category] = model.color;
     }
     setState(() {
       loading = false;
@@ -62,7 +56,11 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Category Wise Transaction'),
+        title: Text(
+          'Category Wise Transaction',
+          style: kWhiteFontStyle,
+        ),
+        backgroundColor: Color(0xFF468C49),
       ),
       body: loading
           ? Center(child: Text('Loading'))
@@ -76,8 +74,8 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                       children: [
                         Text(
                           'Category',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: kBlackFontStyle.copyWith(
+                              fontWeight: FontWeight.bold),
                         ),
                         DropdownButton(
                           onChanged: (value) {
@@ -92,7 +90,11 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                             (index) {
                               return DropdownMenuItem<String>(
                                   value: categoryList[index],
-                                  child: Text(categoryList[index]));
+                                  child: Text(
+                                    categoryList[index],
+                                    style: kBlackFontStyle.copyWith(
+                                        fontSize: 18, letterSpacing: .5),
+                                  ));
                             },
                           ),
                         ),
@@ -192,7 +194,7 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          '$totalAmount/-',
+                          '${totalAmount.toStringAsFixed(0)}/-',
                           style: TextStyle(
                               fontSize: 18,
                               decoration: TextDecoration.underline),

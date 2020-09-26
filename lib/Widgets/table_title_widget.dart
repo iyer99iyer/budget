@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TableTitle extends StatelessWidget {
   final double width;
@@ -13,7 +14,12 @@ class TableTitle extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+          style: GoogleFonts.patrickHandSc(
+            fontSize: 17,
+            color: Colors.black,
+            letterSpacing: 1,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

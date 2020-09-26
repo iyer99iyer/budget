@@ -2,6 +2,7 @@ import 'package:budget/bottom_sheets/add_category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Widgets/table_title_widget.dart';
 
@@ -28,7 +29,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Category'),
+        backgroundColor: Color(0xFF2F5A9B),
+        title: Text(
+          'Add Category',
+          style: GoogleFonts.patrickHandSc(
+            fontSize: 24,
+            color: Colors.white,
+            letterSpacing: 1.5,
+          ),
+        ),
       ),
       body: SafeArea(
         child: Center(
@@ -57,10 +66,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ],
                 ),
                 Container(
-                  height: 180,
+                  height: size.height * .8,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('category')
+                        .orderBy('category')
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
@@ -88,10 +98,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     ),
                                   ),
                                   Container(
-                                      width: size.width * .3,
-                                      child: Center(
-                                          child: Text(
-                                              document.data()['category']))),
+                                    width: size.width * .35,
+                                    child: Center(
+                                      child: Text(
+                                        document.data()['category'],
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.patrickHandSc(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                          letterSpacing: 1.5,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   Container(
                                     width: size.width * .3,
                                     child: Center(
@@ -124,8 +143,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF2F5A9B),
         onPressed: () => _onButtonPressed(),
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -137,7 +160,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         builder: (context) {
           return Container(
             color: Color(0xFF737373),
-            height: MediaQuery.of(context).size.height * .62,
+            height: MediaQuery.of(context).size.height * .7,
             child: Container(
               child: AddCategory(),
               decoration: BoxDecoration(

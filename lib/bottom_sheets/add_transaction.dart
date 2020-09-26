@@ -1,3 +1,4 @@
+import 'package:budget/constant.dart';
 import 'package:budget/database/firestore_services.dart';
 import 'package:budget/models/category_model.dart';
 import 'package:budget/models/transaction_model.dart';
@@ -57,7 +58,11 @@ class _AddTransactionState extends State<AddTransaction> {
   Widget build(BuildContext context) {
     return loading
         ? Container(
-            child: Center(child: Text('Checking Categories')),
+            child: Center(
+                child: Text(
+              'Checking Categories',
+              style: kBlackFontStyle,
+            )),
           )
         : Container(
             padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -66,12 +71,16 @@ class _AddTransactionState extends State<AddTransaction> {
               children: <Widget>[
                 Text(
                   'Add Category',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: kBlackFontStyle.copyWith(
+                      fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Color'),
+                    Text(
+                      'Color',
+                      style: kBlackFontStyle,
+                    ),
                     DropdownButton(
                       onChanged: (value) {
                         setState(() {
@@ -84,7 +93,11 @@ class _AddTransactionState extends State<AddTransaction> {
                         (index) {
                           return DropdownMenuItem<String>(
                               value: categoryList[index],
-                              child: Text(categoryList[index]));
+                              child: Text(
+                                categoryList[index],
+                                style:
+                                    kBlackFontStyle.copyWith(letterSpacing: .5),
+                              ));
                         },
                       ),
                     ),
@@ -93,7 +106,10 @@ class _AddTransactionState extends State<AddTransaction> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Particular'),
+                    Text(
+                      'Particular',
+                      style: kBlackFontStyle,
+                    ),
                     Container(
                       width: 120,
                       child: TextField(
@@ -112,7 +128,10 @@ class _AddTransactionState extends State<AddTransaction> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Amount'),
+                    Text(
+                      'Amount',
+                      style: kBlackFontStyle,
+                    ),
                     Container(
                       width: 120,
                       child: TextField(
@@ -134,7 +153,7 @@ class _AddTransactionState extends State<AddTransaction> {
                   ],
                 ),
                 FlatButton(
-                  color: Colors.blue,
+                  color: Color(0xFFBB3C3C),
                   onPressed: () {
                     print('${amount.toStringAsFixed(2)}');
                     var transaction = TransactionModel(
@@ -150,7 +169,7 @@ class _AddTransactionState extends State<AddTransaction> {
                   },
                   child: Text(
                     'Add Transaction',
-                    style: TextStyle(color: Colors.white),
+                    style: kWhiteFontStyle,
                   ),
                 ),
               ],
