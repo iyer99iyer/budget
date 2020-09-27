@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../Widgets/table_title_widget.dart';
+import '../constant.dart';
 
 class CategoryScreen extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF2F5A9B),
+        backgroundColor: kCategoryColor,
         title: Text(
           'Add Category',
           style: GoogleFonts.patrickHandSc(
@@ -52,11 +53,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     TableTitle(
-                      width: size.width * .3,
+                      width: size.width * .2,
                       title: 'Color',
                     ),
                     TableTitle(
-                      width: size.width * .3,
+                      width: size.width * .35,
                       title: 'Category',
                     ),
                     TableTitle(
@@ -80,34 +81,44 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           children: snapshot.data.documents
                               .map<Widget>((DocumentSnapshot document) {
                             return Container(
-                              padding: EdgeInsets.symmetric(vertical: 16),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.black),
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              margin: EdgeInsets.all(8),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
+                                  //color
                                   Container(
-                                    width: size.width * .3,
+                                    width: size.width * .2,
                                     child: Center(
                                       child: Container(
                                         padding: EdgeInsets.all(8),
                                         width: 48,
                                         height: 24,
-                                        color: Color(int.parse(
-                                            document.data()['color'])),
+                                        decoration: BoxDecoration(
+                                          color: Color(int.parse(
+                                              document.data()['color'])),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                        ),
                                       ),
                                     ),
                                   ),
+                                  //Category Name
                                   Container(
+                                    padding: EdgeInsets.only(left: 30),
                                     width: size.width * .35,
-                                    child: Center(
-                                      child: Text(
-                                        document.data()['category'],
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.patrickHandSc(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                          letterSpacing: 1.5,
-                                        ),
+                                    child: Text(
+                                      document.data()['category'],
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.patrickHandSc(
+                                        fontSize: 25,
+                                        color: Colors.black,
+                                        letterSpacing: 1,
                                       ),
                                     ),
                                   ),
@@ -119,10 +130,26 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Container(
-                                            child: Icon(Icons.edit),
-                                          ),
-                                          Container(
-                                            child: Icon(Icons.delete),
+                                            decoration: BoxDecoration(
+                                              color: kCategoryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.edit,
+                                                  color: Colors.white,
+                                                ),
+                                                Icon(
+                                                  Icons.delete,
+                                                  color: Colors.white,
+                                                ),
+                                              ],
+                                            ),
+                                            padding: EdgeInsets.all(8),
                                           ),
                                         ],
                                       ),
@@ -143,7 +170,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF2F5A9B),
+        backgroundColor: kCategoryColor,
         onPressed: () => _onButtonPressed(),
         child: Icon(
           Icons.add,

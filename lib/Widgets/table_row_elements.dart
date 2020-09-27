@@ -15,7 +15,7 @@ class TableRowElement extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.left,
-        style: kBlackFontStyle.copyWith(fontSize: 19),
+        style: kBlackFontStyle.copyWith(fontSize: 20),
       ),
     );
   }
@@ -34,7 +34,7 @@ class TableRowElementNumber extends StatelessWidget {
       width: width,
       child: Text(
         title,
-        style: kBlackFontStyle.copyWith(fontSize: 16),
+        style: kBlackFontStyle.copyWith(fontSize: 22),
         textAlign: TextAlign.end,
       ),
     );

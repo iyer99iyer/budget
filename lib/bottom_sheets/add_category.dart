@@ -61,7 +61,12 @@ class _AddCategoryState extends State<AddCategory> {
                         padding: EdgeInsets.all(8),
                         width: 48,
                         height: 24,
-                        color: Color(int.parse(colorValues[index])),
+                        decoration: BoxDecoration(
+                          color: Color(int.parse(colorValues[index])),
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     );
                   },

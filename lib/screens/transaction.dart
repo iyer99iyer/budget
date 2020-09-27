@@ -1,8 +1,8 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:budget/Widgets/table_row_elements.dart';
 import 'package:budget/Widgets/table_title_widget.dart';
 import 'package:budget/bottom_sheets/add_transaction.dart';
 import 'package:budget/constant.dart';
+import 'package:budget/database/firestore_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,8 @@ class Transaction extends StatefulWidget {
   @override
   _TransactionState createState() => _TransactionState();
 }
+
+FireStoreServices fireStoreServices = FireStoreServices();
 
 class _TransactionState extends State<Transaction> {
   @override
@@ -23,7 +25,7 @@ class _TransactionState extends State<Transaction> {
           'Transactions',
           style: kWhiteFontStyle,
         ),
-        backgroundColor: Color(0xFFBB3C3C),
+        backgroundColor: kTransactionColor,
       ),
       body: SafeArea(
         child: Center(
@@ -65,7 +67,13 @@ class _TransactionState extends State<Transaction> {
                   height: 12,
                 ),
                 Container(
-                  height: size.height * .76,
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
+                  height: size.height * .7,
+                  decoration: BoxDecoration(
+                    color: kTransactionColor,
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('transaction')
@@ -81,15 +89,15 @@ class _TransactionState extends State<Transaction> {
                         return Text("Loading");
                       }
 
-                      return new ListView(
+                      return ListView(
                         children:
                             snapshot.data.docs.map((DocumentSnapshot document) {
                           Timestamp date = document.data()['date'];
-                          print(
-                              '${date.toDate().day} / ${date.toDate().month}|| ${date}');
 
                           return Container(
+                            margin: EdgeInsets.symmetric(vertical: 2),
                             decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Colors.black),
                               color: Color(int.parse(document.data()['color'])),
                             ),
@@ -135,7 +143,7 @@ class _TransactionState extends State<Transaction> {
           Icons.add,
           color: Colors.white,
         ),
-        backgroundColor: Color(0xFFBB3C3C),
+        backgroundColor: kTransactionColor,
       ),
     );
   }

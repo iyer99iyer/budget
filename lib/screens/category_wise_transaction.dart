@@ -1,10 +1,10 @@
-import 'package:budget/constant.dart';
+import 'package:budget/Widgets/table_row_elements.dart';
+import 'package:budget/Widgets/table_title_widget.dart';
+import 'package:budget/database/firestore_services.dart';
+import 'package:budget/models/category_model.dart';
 import 'package:flutter/material.dart';
 
-import '../Widgets/table_row_elements.dart';
-import '../Widgets/table_title_widget.dart';
-import '../database/firestore_services.dart';
-import '../models/category_model.dart';
+import '../constant.dart';
 import '../models/transaction_model.dart';
 
 class CategoryWiseTransaction extends StatefulWidget {
@@ -60,7 +60,7 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
           'Category Wise Transaction',
           style: kWhiteFontStyle,
         ),
-        backgroundColor: Color(0xFF468C49),
+        backgroundColor: kCategoryWiseTransaction,
       ),
       body: loading
           ? Center(child: Text('Loading'))
@@ -108,7 +108,7 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TableTitle(
-                        width: size.width * .15,
+                        width: size.width * .1,
                         title: 'Date',
                       ),
                       TableTitle(
@@ -136,12 +136,20 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                   transactions.isEmpty
                       ? Text('ruko')
                       : Container(
-                          height: size.height * .4,
+                          height: size.height * .6,
+                          decoration: BoxDecoration(
+                            color: kCategoryWiseTransaction,
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           child: ListView(
                             children:
                                 List.generate(transactions.length, (index) {
                               return Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 2),
                                 decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
                                   border: Border.all(color: Colors.black),
                                   color: Color(
                                       int.parse(transactions[index].color)),
@@ -152,7 +160,11 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     TableRowElement(
-                                      width: size.width * .15,
+                                      width: size.width * .05,
+                                      title: '',
+                                    ),
+                                    TableRowElement(
+                                      width: size.width * .13,
                                       title:
                                           '${transactions[index].date.toDate().day}/${transactions[index].date.toDate().month}',
                                     ),
@@ -170,6 +182,10 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                                           .amount
                                           .toStringAsFixed(0),
                                     ),
+                                    TableRowElement(
+                                      width: size.width * .05,
+                                      title: '',
+                                    ),
                                     // DeleteIcon(),
                                   ],
                                 ),
@@ -183,21 +199,23 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                   Container(
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.black),
+                      color: kCategoryWiseTransaction,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
                           'Total',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                          style: kWhiteFontStyle,
+                        ),
+                        SizedBox(
+                          width: 80,
                         ),
                         Text(
                           '${totalAmount.toStringAsFixed(0)}/-',
-                          style: TextStyle(
-                              fontSize: 18,
-                              decoration: TextDecoration.underline),
+                          style: kWhiteFontStyle,
                         )
                       ],
                     ),

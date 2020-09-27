@@ -12,11 +12,14 @@ class FireStoreServices {
   }
 
   Future<void> addCategory(CategoryModel categoryModel) {
-    return _db.collection('category').doc().set(categoryModel.toMap());
+    return _db
+        .collection('category')
+        .doc(categoryModel.id)
+        .set(categoryModel.toMap());
   }
 
   Future<List<CategoryModel>> getCategories() async {
-    List<CategoryModel> categorymodels = [];
+    List<CategoryModel> categoryModels = [];
 
     await _db
         .collection('category')
@@ -25,10 +28,10 @@ class FireStoreServices {
         .then((QuerySnapshot querySnapshot) => {
               querySnapshot.docs.forEach((doc) {
                 // print(CategoryModel.fromFirestore(doc.data()).color);
-                categorymodels.add(CategoryModel.fromFirestore(doc.data()));
+                categoryModels.add(CategoryModel.fromFirestore(doc.data()));
               })
             });
-    return categorymodels;
+    return categoryModels;
   }
 
   Future<List<TransactionModel>> queryTransaction(String category) async {

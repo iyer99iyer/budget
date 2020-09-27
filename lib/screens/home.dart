@@ -1,11 +1,11 @@
 import 'package:budget/Widgets/home_page_button_widget.dart';
-import 'package:budget/screens/aggregate_transaction.dart';
-import 'package:budget/screens/category_wise_transaction.dart';
 import 'package:budget/screens/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'aggregate_transaction.dart';
 import 'category.dart';
+import 'category_wise_transaction.dart';
 
 class Home extends StatelessWidget {
   @override

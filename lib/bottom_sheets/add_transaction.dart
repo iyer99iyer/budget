@@ -92,12 +92,13 @@ class _AddTransactionState extends State<AddTransaction> {
                         categoryList.length,
                         (index) {
                           return DropdownMenuItem<String>(
-                              value: categoryList[index],
-                              child: Text(
-                                categoryList[index],
-                                style:
-                                    kBlackFontStyle.copyWith(letterSpacing: .5),
-                              ));
+                            value: categoryList[index],
+                            child: Text(
+                              categoryList[index],
+                              style:
+                                  kBlackFontStyle.copyWith(letterSpacing: .5),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -154,15 +155,16 @@ class _AddTransactionState extends State<AddTransaction> {
                 ),
                 FlatButton(
                   color: Color(0xFFBB3C3C),
-                  onPressed: () {
+                  onPressed: () async {
                     print('${amount.toStringAsFixed(2)}');
+
                     var transaction = TransactionModel(
                       id: uuid.v4(),
                       date: Timestamp.now(),
                       particular: particularName,
-                      category: currentCategory,
-                      amount: amount,
                       color: categoryMap[currentCategory],
+                      amount: amount,
+                      category: currentCategory,
                     );
                     fireStoreServices.addTransaction(transaction);
                     Navigator.pop(context);

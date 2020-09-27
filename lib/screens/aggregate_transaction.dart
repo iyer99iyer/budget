@@ -101,7 +101,7 @@ class _AggregateTransactionState extends State<AggregateTransaction> {
           'Aggregate Transaction',
           style: kWhiteFontStyle,
         ),
-        backgroundColor: Color(0xFFBC950D),
+        backgroundColor: kAggregateTransaction,
         centerTitle: true,
       ),
       body: Container(
