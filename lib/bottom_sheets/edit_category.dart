@@ -1,22 +1,41 @@
-import 'package:budget/constant.dart';
 import 'package:budget/database/firestore_services.dart';
-import 'package:budget/models/category_model.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
-class AddCategory extends StatefulWidget {
+import '../constant.dart';
+
+class EditCategory extends StatefulWidget {
+  final String category;
+  final String color;
+
+  const EditCategory({Key key, this.category, this.color}) : super(key: key);
+
   @override
-  _AddCategoryState createState() => _AddCategoryState();
+  _EditCategoryState createState() => _EditCategoryState();
 }
-
-String color = '0xFFC4C4C4';
-String categoryName;
 
 final FireStoreServices fireStoreServices = FireStoreServices();
 
-var uuid = Uuid();
+class _EditCategoryState extends State<EditCategory> {
+  String color = '0xFFC4C4C4';
+  String preCategoryName;
+  String categoryName;
 
-class _AddCategoryState extends State<AddCategory> {
+  TextEditingController text = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    color = widget.color;
+    preCategoryName = widget.category;
+    categoryName = widget.category;
+    print(categoryName);
+    setState(() {
+      text.text = widget.category;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,15 +94,19 @@ class _AddCategoryState extends State<AddCategory> {
               Container(
                 width: 120,
                 child: TextField(
+                  controller: text,
                   autofocus: true,
                   onChanged: (value) {
                     setState(() {
                       categoryName = value;
                     });
+                    print(categoryName);
                   },
                   textAlign: TextAlign.center,
+                  style: kBlackFontStyle,
                   decoration: InputDecoration(
                     hintText: 'Category name',
+                    hintStyle: kBlackFontStyle.copyWith(color: Colors.grey),
                   ),
                 ),
               )
@@ -92,22 +115,25 @@ class _AddCategoryState extends State<AddCategory> {
           SizedBox(
             height: 20,
           ),
-          FlatButton(
-            color: Color(0xFF2F5A9B),
-            onPressed: () {
-              print('$color $categoryName');
-              var category = CategoryModel(
-                id: uuid.v4(),
-                color: color,
-                category: categoryName,
-              );
-              fireStoreServices.addCategory(category);
-              Navigator.pop(context);
-            },
-            child: Text(
-              'Add Category',
-              style: kWhiteFontStyle,
-            ),
+          Row(
+            children: [
+              FlatButton(
+                color: Color(0xFF2F5A9B),
+                onPressed: () {
+                  print('$color $categoryName');
+
+                  print(categoryName);
+
+                  fireStoreServices.EditCategory(
+                      categoryName, color, preCategoryName);
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Edit',
+                  style: kWhiteFontStyle,
+                ),
+              ),
+            ],
           ),
         ],
       ),

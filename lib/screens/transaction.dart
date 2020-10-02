@@ -1,5 +1,3 @@
-import 'package:budget/Widgets/table_row_elements.dart';
-import 'package:budget/Widgets/table_title_widget.dart';
 import 'package:budget/bottom_sheets/add_transaction.dart';
 import 'package:budget/constant.dart';
 import 'package:budget/database/firestore_services.dart';
@@ -31,44 +29,46 @@ class _TransactionState extends State<Transaction> {
         child: Center(
           child: Container(
             padding: EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 24,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TableTitle(
-                      width: size.width * .15,
-                      title: 'Date',
-                    ),
-                    TableTitle(
-                      width: size.width * .25,
-                      title: 'Category',
-                    ),
-                    TableTitle(
-                      width: size.width * .25,
-                      title: 'Particular',
-                    ),
-                    TableTitle(
-                      width: size.width * .2,
-                      title: 'Amount',
-                    ),
-                    // TableTitle(
-                    //   width: size.width * .1,
-                    //   title: '',
-                    // ),
-                    // DeleteIcon(),
-                  ],
-                ),
+                //Titles
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //   children: [
+                //     TableTitle(
+                //       width: size.width * .15,
+                //       title: 'Date',
+                //     ),
+                //     TableTitle(
+                //       width: size.width * .25,
+                //       title: 'Category',
+                //     ),
+                //     TableTitle(
+                //       width: size.width * .25,
+                //       title: 'Particular',
+                //     ),
+                //     TableTitle(
+                //       width: size.width * .2,
+                //       title: 'Amount',
+                //     ),
+                //     // TableTitle(
+                //     //   width: size.width * .1,
+                //     //   title: '',
+                //     // ),
+                //     // DeleteIcon(),
+                //   ],
+                // ),
                 SizedBox(
                   height: 12,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 4),
                   height: size.height * .7,
+                  width: size.width * .9,
                   decoration: BoxDecoration(
                     color: kTransactionColor,
                     border: Border.all(color: Colors.black),
@@ -82,12 +82,12 @@ class _TransactionState extends State<Transaction> {
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
-                        return Text('Loading');
+                        return Center(child: Text('Loading'));
                       }
-
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Text("Loading");
-                      }
+                      //
+                      // if (snapshot.connectionState == ConnectionState.waiting) {
+                      //   return Center(child: Text("Loading"));
+                      // }
 
                       return ListView(
                         children:
@@ -99,32 +99,32 @@ class _TransactionState extends State<Transaction> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(color: Colors.black),
+                              // color: Colors.white,
                               color: Color(int.parse(document.data()['color'])),
                             ),
                             padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TableRowElement(
-                                  width: size.width * .15,
-                                  title:
-                                      '${date.toDate().day}/${date.toDate().month}',
+                            child: ListTile(
+                              title: Text(
+                                "${document.data()['particular']}",
+                                style: kBlackFontStyle,
+                              ),
+                              leading: CircleAvatar(
+                                backgroundColor:
+                                    Color(int.parse(document.data()['color'])),
+                                child: Text(
+                                  '${date.toDate().day}/${date.toDate().month}',
+                                  style: kBlackFontStyle.copyWith(fontSize: 18),
                                 ),
-                                TableRowElement(
-                                  width: size.width * .25,
-                                  title: document.data()['category'],
-                                ),
-                                TableRowElement(
-                                  width: size.width * .25,
-                                  title: document.data()['particular'],
-                                ),
-                                TableRowElementNumber(
-                                  width: size.width * .2,
-                                  title:
-                                      "${double.parse(document.data()['amount'].toString()).toStringAsFixed(0)}/-",
-                                ),
-                                // DeleteIcon(),
-                              ],
+                              ),
+                              subtitle: Text(
+                                '${document.data()['category']}',
+                                style: kBlackFontStyle.copyWith(
+                                    fontSize: 20, color: Colors.grey),
+                              ),
+                              trailing: Text(
+                                "${double.parse(document.data()['amount'].toString()).toStringAsFixed(0)}/-",
+                                style: kBlackFontStyle,
+                              ),
                             ),
                           );
                         }).toList(),
@@ -170,3 +170,28 @@ class _TransactionState extends State<Transaction> {
         });
   }
 }
+
+// Row(
+// mainAxisAlignment: MainAxisAlignment.spaceAround,
+// children: [
+// TableRowElement(
+// width: size.width * .15,
+// title:
+// '${date.toDate().day}/${date.toDate().month}',
+// ),
+// TableRowElement(
+// width: size.width * .25,
+// title: document.data()['category'],
+// ),
+// TableRowElement(
+// width: size.width * .25,
+// title: document.data()['particular'],
+// ),
+// TableRowElementNumber(
+// width: size.width * .2,
+// title:
+// "${double.parse(document.data()['amount'].toString()).toStringAsFixed(0)}/-",
+// ),
+// // DeleteIcon(),
+// ],
+// ),

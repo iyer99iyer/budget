@@ -1,4 +1,5 @@
 import 'package:budget/bottom_sheets/add_category.dart';
+import 'package:budget/bottom_sheets/edit_category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       body: SafeArea(
         child: Center(
           child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 24,
@@ -137,17 +138,26 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                               border: Border.all(
                                                   color: Colors.black),
                                             ),
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.edit,
-                                                  color: Colors.white,
-                                                ),
-                                                Icon(
-                                                  Icons.delete,
-                                                  color: Colors.white,
-                                                ),
-                                              ],
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                print(
+                                                    "${document.data()['category']}, ${document.data()['color']} ");
+                                                _onEditButtonPressed(
+                                                    document.data()['category'],
+                                                    document.data()['color']);
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.edit,
+                                                    color: Colors.white,
+                                                  ),
+                                                  Icon(
+                                                    Icons.delete,
+                                                    color: Colors.white,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                             padding: EdgeInsets.all(8),
                                           ),
@@ -178,6 +188,31 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
       ),
     );
+  }
+
+  _onEditButtonPressed(String category, String color) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return Container(
+            color: Color(0xFF737373),
+            height: MediaQuery.of(context).size.height * .7,
+            child: Container(
+              child: EditCategory(
+                category: category,
+                color: color,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).canvasColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+            ),
+          );
+        });
   }
 
   _onButtonPressed() {

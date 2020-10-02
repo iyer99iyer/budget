@@ -108,13 +108,10 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TableTitle(
-                        width: size.width * .1,
+                        width: size.width * .15,
                         title: 'Date',
                       ),
-                      TableTitle(
-                        width: size.width * .25,
-                        title: 'Category',
-                      ),
+
                       TableTitle(
                         width: size.width * .25,
                         title: 'Particular',
@@ -160,24 +157,21 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     TableRowElement(
-                                      width: size.width * .05,
+                                      width: size.width * .005,
                                       title: '',
                                     ),
                                     TableRowElement(
-                                      width: size.width * .13,
+                                      width: size.width * .22,
                                       title:
                                           '${transactions[index].date.toDate().day}/${transactions[index].date.toDate().month}',
                                     ),
+
                                     TableRowElement(
-                                      width: size.width * .25,
-                                      title: transactions[index].category,
-                                    ),
-                                    TableRowElement(
-                                      width: size.width * .25,
+                                      width: size.width * .26,
                                       title: transactions[index].particular,
                                     ),
                                     TableRowElementNumber(
-                                      width: size.width * .2,
+                                      width: size.width * .25,
                                       title: transactions[index]
                                           .amount
                                           .toStringAsFixed(0),

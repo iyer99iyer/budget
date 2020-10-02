@@ -8,7 +8,10 @@ class FireStoreServices {
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> addTransaction(TransactionModel transactionModel) {
-    return _db.collection('transaction').doc().set(transactionModel.toMap());
+    return _db
+        .collection('transaction')
+        .doc(transactionModel.id)
+        .set(transactionModel.toMap());
   }
 
   Future<void> addCategory(CategoryModel categoryModel) {
@@ -16,6 +19,29 @@ class FireStoreServices {
         .collection('category')
         .doc(categoryModel.id)
         .set(categoryModel.toMap());
+  }
+
+  Future<void> EditCategory(
+      String editCategory, String color, String category) async {
+    String docID = await getCategoryDocID(category);
+    return _db
+        .collection('category')
+        .doc(docID)
+        .update({'category': editCategory, 'color': color})
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  Future<String> getCategoryDocID(String category) async {
+    String docID;
+    await _db
+        .collection('category')
+        .where('category', isEqualTo: category)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      docID = querySnapshot.docs[0].data()['id'];
+    });
+    return docID;
   }
 
   Future<List<CategoryModel>> getCategories() async {
