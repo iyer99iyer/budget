@@ -27,3 +27,4 @@ final Color kCategoryColor = Color(0xFF2F5A9B);
 final Color kTransactionColor = Color(0xFFBB3C3C);
 final Color kCategoryWiseTransaction = Color(0xFF468C49);
 final Color kAggregateTransaction = Color(0xFFBC950D);
+final Color kBlackColor = Colors.black;
