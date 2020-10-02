@@ -22,7 +22,8 @@ jobs:
       with:
         flutter-version: '1.22.0'
     - run: flutter pub get
-#     - run: flutter test
+#     - run: flutter test 
+    - run: flutter build apk --debug
     - run: flutter build apk --split-per-abi
     - name: Release APK
       uses: ncipollo/release-action@v1 
