@@ -28,5 +28,5 @@ jobs:
     - name: Release APK
       uses: ncipollo/release-action@v1 
       with:
-        artifacts: "build/app/output/apk/release/*.apk"
+        artifacts: "build/app/outputs/apk/release/*.apk"
         token: ${{ secrets.BUDGET_CI_CD }}
