@@ -1,13 +1,13 @@
 import 'package:budget/database/firestore_services.dart';
+import 'package:budget/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 import '../constant.dart';
 
 class EditCategory extends StatefulWidget {
-  final String category;
-  final String color;
+  final CategoryModel categoryModel;
 
-  const EditCategory({Key key, this.category, this.color}) : super(key: key);
+  const EditCategory({Key key, this.categoryModel}) : super(key: key);
 
   @override
   _EditCategoryState createState() => _EditCategoryState();
@@ -27,12 +27,12 @@ class _EditCategoryState extends State<EditCategory> {
     // TODO: implement initState
     super.initState();
 
-    color = widget.color;
-    preCategoryName = widget.category;
-    categoryName = widget.category;
+    color = widget.categoryModel.color;
+    preCategoryName = widget.categoryModel.category;
+    categoryName = widget.categoryModel.category;
     print(categoryName);
     setState(() {
-      text.text = widget.category;
+      text.text = widget.categoryModel.category;
     });
   }
 
@@ -44,7 +44,7 @@ class _EditCategoryState extends State<EditCategory> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Add Category',
+            'Edit Category',
             style: kBlackFontStyle.copyWith(
                 fontWeight: FontWeight.bold, fontSize: 30),
           ),
@@ -116,6 +116,7 @@ class _EditCategoryState extends State<EditCategory> {
             height: 20,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               FlatButton(
                 color: Color(0xFF2F5A9B),
@@ -124,8 +125,10 @@ class _EditCategoryState extends State<EditCategory> {
 
                   print(categoryName);
 
-                  fireStoreServices.EditCategory(
-                      categoryName, color, preCategoryName);
+                  fireStoreServices.editCategory(CategoryModel(
+                      category: categoryName,
+                      color: color,
+                      id: widget.categoryModel.id));
                   Navigator.pop(context);
                 },
                 child: Text(
@@ -133,6 +136,17 @@ class _EditCategoryState extends State<EditCategory> {
                   style: kWhiteFontStyle,
                 ),
               ),
+              FlatButton(
+                color: kTransactionColor,
+                onPressed: () {
+                  // fireStoreServices.deleteCategory(widget.categoryModel.id);
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Delete',
+                  style: kWhiteFontStyle,
+                ),
+              )
             ],
           ),
         ],

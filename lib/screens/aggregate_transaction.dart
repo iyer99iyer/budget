@@ -82,15 +82,17 @@ class _AggregateTransactionState extends State<AggregateTransaction> {
       transactions = transactions;
     });
 
-    double totalAmount = getTotalAmount();
+    if (transactions != null) {
+      double totalAmount = getTotalAmount();
 
-    print(transactions.length);
+      print(transactions.length);
 
-    print(
-        'category: $category, totalAmount: $totalAmount, color: $currentColor');
+      print(
+          'category: $category, totalAmount: $totalAmount, color: $currentColor');
 
-    aggregated.add(AggregateTransactionModel(
-        category: category, totalAmount: totalAmount, color: currentColor));
+      aggregated.add(AggregateTransactionModel(
+          category: category, totalAmount: totalAmount, color: currentColor));
+    }
   }
 
   double getTotalAmount() {

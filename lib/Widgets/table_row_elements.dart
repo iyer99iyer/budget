@@ -33,7 +33,7 @@ class TableRowElementNumber extends StatelessWidget {
     return Container(
       width: width,
       child: Text(
-        title,
+        '$title/-',
         style: kBlackFontStyle.copyWith(fontSize: 22),
         textAlign: TextAlign.end,
       ),

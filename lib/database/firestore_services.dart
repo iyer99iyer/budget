@@ -14,6 +14,30 @@ class FireStoreServices {
         .set(transactionModel.toMap());
   }
 
+  Future<void> editTransaction(TransactionModel transactionModel) async {
+    print('in database ## ${transactionModel.id}');
+    return _db
+        .collection('transaction')
+        .doc(transactionModel.id)
+        .update({
+          'category': transactionModel.category,
+          'particular': transactionModel.particular,
+          'amount': transactionModel.amount
+        })
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  Future<void> deleteTransaction(transactionID) async {
+    print('in database ## $transactionID}');
+    return _db
+        .collection('transaction')
+        .doc(transactionID)
+        .delete()
+        .then((value) => print("transaction Deleted"))
+        .catchError((error) => print("Failed to delete Transaction : $error"));
+  }
+
   Future<void> addCategory(CategoryModel categoryModel) {
     return _db
         .collection('category')
@@ -21,13 +45,12 @@ class FireStoreServices {
         .set(categoryModel.toMap());
   }
 
-  Future<void> EditCategory(
-      String editCategory, String color, String category) async {
-    String docID = await getCategoryDocID(category);
+  Future<void> editCategory(CategoryModel categoryModel) async {
     return _db
         .collection('category')
-        .doc(docID)
-        .update({'category': editCategory, 'color': color})
+        .doc(categoryModel.id)
+        .update(
+            {'category': categoryModel.category, 'color': categoryModel.color})
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update user: $error"));
   }

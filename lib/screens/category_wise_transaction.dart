@@ -2,6 +2,7 @@ import 'package:budget/Widgets/table_row_elements.dart';
 import 'package:budget/Widgets/table_title_widget.dart';
 import 'package:budget/database/firestore_services.dart';
 import 'package:budget/models/category_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constant.dart';
@@ -104,116 +105,124 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
                   SizedBox(
                     height: 24,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      TableTitle(
-                        width: size.width * .15,
-                        title: 'Date',
-                      ),
-
-                      TableTitle(
-                        width: size.width * .25,
-                        title: 'Particular',
-                      ),
-                      TableTitle(
-                        width: size.width * .2,
-                        title: 'Amount',
-                      ),
-                      // TableTitle(
-                      //   width: size.width * .1,
-                      //   title: '',
-                      // ),
-                      // DeleteIcon(),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
                   transactions.isEmpty
-                      ? Text('ruko')
-                      : Container(
-                          height: size.height * .6,
-                          decoration: BoxDecoration(
-                            color: kCategoryWiseTransaction,
-                            border: Border.all(color: Colors.black),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: ListView(
-                            children:
-                                List.generate(transactions.length, (index) {
-                              return Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 2),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: Colors.black),
-                                  color: Color(
-                                      int.parse(transactions[index].color)),
+                      ? Center(
+                          child: Text(
+                          'No Transaction For this Category',
+                          style: kBlackFontStyle,
+                        ))
+                      : Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                TableTitle(
+                                  width: size.width * .15,
+                                  title: 'Date',
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    TableRowElement(
-                                      width: size.width * .005,
-                                      title: '',
-                                    ),
-                                    TableRowElement(
-                                      width: size.width * .22,
-                                      title:
-                                          '${transactions[index].date.toDate().day}/${transactions[index].date.toDate().month}',
-                                    ),
 
-                                    TableRowElement(
-                                      width: size.width * .26,
-                                      title: transactions[index].particular,
-                                    ),
-                                    TableRowElementNumber(
-                                      width: size.width * .25,
-                                      title: transactions[index]
-                                          .amount
-                                          .toStringAsFixed(0),
-                                    ),
-                                    TableRowElement(
-                                      width: size.width * .05,
-                                      title: '',
-                                    ),
-                                    // DeleteIcon(),
-                                  ],
+                                TableTitle(
+                                  width: size.width * .25,
+                                  title: 'Particular',
                                 ),
-                              );
-                            }),
-                          ),
+                                TableTitle(
+                                  width: size.width * .2,
+                                  title: 'Amount',
+                                ),
+                                // TableTitle(
+                                //   width: size.width * .1,
+                                //   title: '',
+                                // ),
+                                // DeleteIcon(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4, vertical: 4),
+                              height: size.height * .6,
+                              decoration: BoxDecoration(
+                                // color: kCategoryWiseTransaction,
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ListView(
+                                children:
+                                    List.generate(transactions.length, (index) {
+                                  return Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 2, horizontal: 2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(color: Colors.black),
+                                      color: Color(
+                                          int.parse(transactions[index].color)),
+                                    ),
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        TableRowElement(
+                                          width: size.width * .005,
+                                          title: '',
+                                        ),
+                                        TableRowElement(
+                                          width: size.width * .22,
+                                          title:
+                                              '${transactions[index].date.toDate().day}/${transactions[index].date.toDate().month}',
+                                        ),
+
+                                        TableRowElement(
+                                          width: size.width * .26,
+                                          title: transactions[index].particular,
+                                        ),
+                                        TableRowElementNumber(
+                                          width: size.width * .25,
+                                          title: transactions[index]
+                                              .amount
+                                              .toStringAsFixed(0),
+                                        ),
+
+                                        // DeleteIcon(),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.black),
+                                color: kCategoryWiseTransaction,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'Total',
+                                    style: kWhiteFontStyle,
+                                  ),
+                                  SizedBox(
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    '${totalAmount.toStringAsFixed(0)}/-',
+                                    style: kWhiteFontStyle,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black),
-                      color: kCategoryWiseTransaction,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          'Total',
-                          style: kWhiteFontStyle,
-                        ),
-                        SizedBox(
-                          width: 80,
-                        ),
-                        Text(
-                          '${totalAmount.toStringAsFixed(0)}/-',
-                          style: kWhiteFontStyle,
-                        )
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -230,9 +239,11 @@ class _CategoryWiseTransactionState extends State<CategoryWiseTransaction> {
       transactions = transactions;
     });
 
-    getTotalAmount();
+    if (transactions != null) {
+      getTotalAmount();
 
-    print(transactions.length);
+      print(transactions.length);
+    }
   }
 
   getTotalAmount() {

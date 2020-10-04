@@ -1,5 +1,6 @@
 import 'package:budget/bottom_sheets/add_category.dart';
 import 'package:budget/bottom_sheets/edit_category.dart';
+import 'package:budget/models/category_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -142,9 +143,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                               onTap: () {
                                                 print(
                                                     "${document.data()['category']}, ${document.data()['color']} ");
+
+                                                CategoryModel categoryModel =
+                                                    CategoryModel(
+                                                  id: document.data()['id'],
+                                                  color:
+                                                      document.data()['color'],
+                                                  category: document
+                                                      .data()['category'],
+                                                );
+
                                                 _onEditButtonPressed(
-                                                    document.data()['category'],
-                                                    document.data()['color']);
+                                                    categoryModel);
                                               },
                                               child: Row(
                                                 children: [
@@ -190,7 +200,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  _onEditButtonPressed(String category, String color) {
+  _onEditButtonPressed(CategoryModel categoryModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -200,8 +210,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             height: MediaQuery.of(context).size.height * .7,
             child: Container(
               child: EditCategory(
-                category: category,
-                color: color,
+                categoryModel: categoryModel,
               ),
               decoration: BoxDecoration(
                 color: Theme.of(context).canvasColor,
