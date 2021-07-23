@@ -5,12 +5,12 @@ This is a budget mobile application where you can add your daily expenses catego
 <p>
   <img src = "/Budget%20Demo/Screenshot_1627055654.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src = "/Budget%20Demo/Screenshot_1627055670.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src = "/Budget%20Demo/Screenshot_1627055688.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-  <img src = "/Budget%20Demo/Screenshot_1627055706.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src = "/Budget%20Demo/Screenshot_1627055688.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src = "/Budget%20Demo/Screenshot_1627055706.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
   <img src = "/Budget%20Demo/Screenshot_1627055716.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src = "/Budget%20Demo/Screenshot_1627055746.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+  <img src = "/Budget%20Demo/Screenshot_1627055746.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src = "/Budget%20Demo/Screenshot_1627055764.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src = "/Budget%20Demo/Screenshot_1627055783.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src = "/Budget%20Demo/Screenshot_1627055783.png" height = 400>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
 </p>
 
 You can add categories assign different colors to it.
